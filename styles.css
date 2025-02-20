@@ -151,7 +151,7 @@ nav ul li a:hover::after {
 }
 
 .hero-highlights {
-    display: grid;
+    display: inline-flex;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-top: 40px;
