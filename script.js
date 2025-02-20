@@ -1,27 +1,43 @@
-const text = ["a Developer", "a Designer", "a Coder"];
-let index = 0;
-let charIndex = 0;
-const typingElement = document.querySelector(".typing");
+document.addEventListener("DOMContentLoaded", function () {
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll("nav ul li a");
+    
+    navLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            if (this.getAttribute("href").startsWith("#")) {
+                event.preventDefault();
+                const targetId = this.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 50,
+                        behavior: "smooth"
+                    });
+                }
+            }
+        });
+    });
 
-function type() {
-    if (charIndex < text[index].length) {
-        typingElement.innerHTML += text[index].charAt(charIndex);
-        charIndex++;
-        setTimeout(type, 150);
-    } else {
-        setTimeout(erase, 1000);
-    }
-}
+    // Header animation on scroll
+    const header = document.querySelector("header");
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+    });
 
-function erase() {
-    if (charIndex > 0) {
-        typingElement.innerHTML = text[index].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(erase, 100);
-    } else {
-        index = (index + 1) % text.length;
-        setTimeout(type, 500);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", type);
+    // Button hover effect
+    const buttons = document.querySelectorAll(".cta-button");
+    buttons.forEach(button => {
+        button.addEventListener("mouseover", function () {
+            this.style.transform = "scale(1.05)";
+            this.style.transition = "0.3s ease-in-out";
+        });
+        button.addEventListener("mouseout", function () {
+            this.style.transform = "scale(1)";
+        });
+    });
+});
